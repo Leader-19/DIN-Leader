@@ -1,0 +1,58 @@
+export const projects = [
+  {
+    title: 'Website Music Band',
+    description: 'A modern website for a music band built with HTML, CSS, and SASS CSS, featuring responsive design and dynamic content.',
+    tech: ['HTML', 'CSS', 'SASS CSS'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'Email Automation Sending',
+    description: 'An automated email sending system built with Python, designed to streamline email workflows and notifications.',
+    tech: ['Python'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'Weather App',
+    description: 'A weather application built with HTML, CSS, Bootstrap, and JavaScript, providing real-time weather updates and forecasts.',
+    tech: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'POS System',
+    description: 'A Point of Sale system built with PHP MVC architecture, Bootstrap, and MySQL for retail management and inventory tracking.',
+    tech: ['PHP', 'MVC', 'Bootstrap', 'MySQL'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'Leave Management System',
+    description: 'A Leave Management System built with Laravel, Laravel Blade, MySQL, and Tailwind CSS, featuring leave requests, approvals, and employee leave tracking.',
+    tech: ['Laravel', 'Laravel Blade', 'MySQL', 'Tailwind CSS'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'Enterprise Automation Platform',
+    description: 'A dynamic dashboard and automation suite with Laravel backend and Vue.js frontend. Features include Roaming Automation and Interconnect Automation with real-time data streaming via Apache Kafka and data flow management via Apache NiFi.',
+    tech: ['Laravel', 'Vue.js', 'Apache Kafka', 'Apache NiFi'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'CI/CD Pipeline with Argo CD',
+    description: 'Automated deployment pipeline using GitLab, Argo CD, and Rancher for container orchestration on Kubernetes clusters.',
+    tech: ['Argo CD', 'GitLab', 'Rancher', 'Kubernetes', 'Docker'],
+    github: 'https://github.com',
+    demo: '',
+  },
+  {
+    title: 'Database Administration',
+    description: 'Enterprise database solutions using Oracle, MariaDB, and MySQL with high availability configurations on Linux and Windows servers.',
+    tech: ['Oracle', 'MariaDB', 'MySQL', 'Linux', 'Windows Server'],
+    github: 'https://github.com',
+    demo: '',
+  },
+]
