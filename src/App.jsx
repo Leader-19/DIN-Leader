@@ -9,7 +9,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-x-hidden">
           <Navbar />
           <main>
             <Routes>
