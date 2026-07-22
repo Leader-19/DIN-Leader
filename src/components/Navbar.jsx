@@ -1,61 +1,56 @@
 import { Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ThemeToggle from './ThemeToggle'
 
 export default function Navbar() {
   const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const linkClass = (path) => {
     const isActive = location.pathname === path
-    return `block px-3 py-2 text-sm font-medium transition-colors ${
+    return `relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
       isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'
+    } ${
+      isActive ? 'after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full' : ''
     }`
   }
 
-  const NavLinks = () => (
-    <>
-      <Link to="/" className={linkClass('/')} onClick={() => setMobileOpen(false)}>
-        Home
-      </Link>
-      <Link to="/about" className={linkClass('/about')} onClick={() => setMobileOpen(false)}>
-        About
-      </Link>
-      <Link to="/education" className={linkClass('/education')} onClick={() => setMobileOpen(false)}>
-        Education
-      </Link>
-      <Link to="/experience" className={linkClass('/experience')} onClick={() => setMobileOpen(false)}>
-        Experience
-      </Link>
-      <Link to="/projects" className={linkClass('/projects')} onClick={() => setMobileOpen(false)}>
-        Projects
-      </Link>
-      <Link to="/contact" className={linkClass('/contact')} onClick={() => setMobileOpen(false)}>
-        Contact
-      </Link>
-      <ThemeToggle />
-    </>
-  )
+  const navLinks = ['/', '/about', '/education', '/experience', '/projects', '/contact']
+  const labels = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Contact']
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled
+        ? 'glass border-b border-indigo-100/50 dark:border-indigo-900/30 shadow-sm'
+        : 'glass border-b border-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="text-xl md:text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-              DIN Leader
-            </Link>
+        <div className="flex justify-between h-16 items-center">
+          <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">
+            DIN Leader
+          </Link>
+
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((path, i) => (
+              <Link key={path} to={path} className={linkClass(path)}>
+                {labels[i]}
+              </Link>
+            ))}
+            <ThemeToggle />
           </div>
 
-          <div className="hidden md:flex items-center space-x-6">
-            <NavLinks />
-          </div>
-
-          <div className="flex items-center md:hidden gap-3">
+          <div className="flex items-center md:hidden gap-2">
             <ThemeToggle />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (
@@ -73,9 +68,22 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg">
+        <div className="md:hidden glass border-t border-indigo-100/50 dark:border-indigo-900/30">
           <div className="px-4 py-3 space-y-1">
-            <NavLinks />
+            {navLinks.map((path, i) => (
+              <Link
+                key={path}
+                to={path}
+                onClick={() => setMobileOpen(false)}
+                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  location.pathname === path
+                    ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10'
+                }`}
+              >
+                {labels[i]}
+              </Link>
+            ))}
           </div>
         </div>
       )}

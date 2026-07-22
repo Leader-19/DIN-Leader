@@ -1,45 +1,37 @@
 import { experiences } from '../data/experience'
+import TimelineCard from '../components/TimelineCard'
 
 export default function Experience() {
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-      <section className="py-12 md:py-24">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+      <div className="absolute top-20 left-1/2 w-[600px] h-[600px] bg-indigo-100/20 dark:bg-indigo-900/10 rounded-full blur-3xl -translate-x-1/2"></div>
+
+      <section className="py-12 md:py-24 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-14 md:mb-20">
+            <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-200 dark:shadow-indigo-900/50 mb-6">
+              <svg className="w-7 h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M12 18h.01M7 21h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
             <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight mb-4">
-              Experience
+              Work Experience
             </h1>
-            <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              My professional work experience and career journey.
+            <p className="text-base md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              My professional journey and career milestones.
             </p>
           </div>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="absolute left-3 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-200 via-indigo-300 to-indigo-200 transform md:-translate-x-1/2"></div>
-            <div className="space-y-8 md:space-y-10">
-              {experiences.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative flex flex-col md:flex-row items-start md:items-center animate-fade-in-up ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
-                  style={{ animationDelay: `${index * 0.15}s` }}
-                >
-                  <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-10' : 'md:text-left md:pl-10'} pl-10 md:pl-0`}>
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 md:p-6 shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
-                      <span className="inline-block px-3 py-1 bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-sm rounded-full font-semibold mb-3">
-                        {item.period}
-                      </span>
-                      <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">{item.title}</h3>
-                      <p className="text-indigo-600 dark:text-indigo-400 font-semibold mt-1">{item.company}</p>
-                      <p className="text-gray-600 dark:text-gray-300 mt-3 leading-relaxed text-sm md:text-base">{item.description}</p>
-                    </div>
-                  </div>
-                  <div className="absolute left-3 md:left-1/2 w-3 h-3 md:w-4 md:h-4 bg-indigo-600 dark:bg-indigo-500 rounded-full border-2 md:border-4 border-white dark:border-gray-900 shadow-lg transform -translate-x-1/2 mt-1 md:mt-0 ring-2 md:ring-4 ring-indigo-100 dark:ring-indigo-900/50"></div>
-                  <div className={`flex-1 ${index % 2 === 0 ? 'md:pl-10' : 'md:pr-10'} pl-10 md:pl-0 md:pr-0`}></div>
-                </div>
-              ))}
-            </div>
+          <div className="relative max-w-5xl mx-auto">
+            {experiences.map((item, index) => (
+              <TimelineCard
+                key={index}
+                item={item}
+                index={index}
+                isLast={index === experiences.length - 1}
+                type="experience"
+              />
+            ))}
           </div>
         </div>
       </section>
