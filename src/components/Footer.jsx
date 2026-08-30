@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 relative">
+    <footer className="bg-white dark:bg-[#111827] border-t border-slate-200 dark:border-gray-800 relative">
       <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 via-purple-500/5 to-indigo-500/5"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -10,22 +10,23 @@ export default function Footer() {
             <Link to="/" className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">
               DIN Leader
             </Link>
-            <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
+            <p className="text-slate-500 dark:text-gray-400 mt-1 text-sm">
               Junior Roaming & Interconnect Administrator
             </p>
           </div>
           <div className="flex gap-5">
             {[
               { href: 'https://facebook.com', icon: 'facebook' },
-              { href: 'https://github.com', icon: 'github' },
-              { href: 'https://linkedin.com', icon: 'linkedin' },
+              { href: 'https://github.com/Leader-19', icon: 'github' },
+              { href: 'https://www.linkedin.com/in/leader-din-441bb0363/', icon: 'linkedin' },
+              { href: 'https://t.me/Leader_DEV1', icon: 'telegram' },
             ].map(({ href, icon }) => (
               <a
                 key={icon}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl glass border border-indigo-100/50 dark:border-indigo-900/30 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-800/50 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg"
+                className="w-10 h-10 rounded-xl glass border border-indigo-100/60 dark:border-indigo-900/40 flex items-center justify-center text-slate-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-800/50 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg"
               >
                 {icon === 'facebook' && (
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -42,11 +43,16 @@ export default function Footer() {
                     <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
                   </svg>
                 )}
+                {icon === 'telegram' && (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+                  </svg>
+                )}
               </a>
             ))}
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 text-center text-sm text-gray-500 dark:text-gray-400">
+        <div className="mt-8 pt-6 border-t border-slate-100 dark:border-gray-800 text-center text-sm text-slate-500 dark:text-gray-400">
           &copy; {new Date().getFullYear()} DIN Leader. All rights reserved.
         </div>
       </div>

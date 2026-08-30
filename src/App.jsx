@@ -3,6 +3,8 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
+import FloatingContact from './components/FloatingContact'
+import ScrollProgress from './components/ScrollProgress'
 import { routes } from '../routes/route.jsx'
 
 function App() {
@@ -10,6 +12,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <div className="min-h-screen w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-x-hidden">
+          <ScrollProgress />
           <Navbar />
           <main>
             <Routes>
@@ -19,6 +22,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <FloatingContact />
           <BackToTop />
         </div>
       </Router>

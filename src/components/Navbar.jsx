@@ -9,84 +9,140 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const linkClass = (path) => {
-    const isActive = location.pathname === path
-    return `relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-      isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'
-    } ${
-      isActive ? 'after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full' : ''
-    }`
-  }
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [location.pathname])
 
-  const navLinks = ['/', '/about', '/education', '/experience', '/projects', '/contact']
-  const labels = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Contact']
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/education', label: 'Education' },
+    { path: '/experience', label: 'Experience' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/contact', label: 'Contact' },
+  ]
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled
-        ? 'glass border-b border-indigo-100/50 dark:border-indigo-900/30 shadow-sm'
-        : 'glass border-b border-transparent'
-    }`}>
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'glass border-b border-white/20 dark:border-white/5 shadow-[0_1px_3px_rgba(0,0,0,0.05)]'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">
-            DIN Leader
+          {/* Logo */}
+          <Link
+            to="/"
+            className="relative text-xl md:text-2xl font-extrabold tracking-tight group"
+          >
+            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 bg-[length:200%_auto] group-hover:animate-[gradient-shift_2s_ease_infinite]">
+              DIN Leader
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((path, i) => (
-              <Link key={path} to={path} className={linkClass(path)}>
-                {labels[i]}
-              </Link>
-            ))}
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1 bg-slate-100/70 dark:bg-white/5 rounded-full px-1.5 py-1 border border-slate-200/60 dark:border-white/8">
+            {navLinks.map(({ path, label }) => {
+              const isActive = location.pathname === path
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`relative px-4 py-1.5 text-[13px] font-medium rounded-full transition-all duration-300 ${
+                    isActive
+                      ? 'text-white dark:text-white'
+                      : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-200'
+                  }`}
+                >
+                  {isActive && (
+                    <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-500 dark:to-purple-500 rounded-full shadow-md shadow-indigo-500/25 dark:shadow-indigo-500/20" />
+                  )}
+                  <span className="relative z-10">{label}</span>
+                </Link>
+              )
+            })}
+            <div className="w-px h-5 bg-gray-300/50 dark:bg-white/10 mx-1" />
             <ThemeToggle />
           </div>
 
+          {/* Mobile: Theme + Hamburger */}
           <div className="flex items-center md:hidden gap-2">
             <ThemeToggle />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors"
+              className="relative w-10 h-10 rounded-xl flex items-center justify-center text-slate-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/10 transition-all duration-200"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
+              <div className="w-5 h-4 flex flex-col justify-between">
+                <span
+                  className={`w-full h-0.5 bg-current rounded-full transition-all duration-300 origin-center ${
+                    mobileOpen ? 'rotate-45 translate-y-[7px]' : ''
+                  }`}
+                />
+                <span
+                  className={`w-full h-0.5 bg-current rounded-full transition-all duration-300 ${
+                    mobileOpen ? 'opacity-0 scale-x-0' : ''
+                  }`}
+                />
+                <span
+                  className={`w-full h-0.5 bg-current rounded-full transition-all duration-300 origin-center ${
+                    mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="md:hidden glass border-t border-indigo-100/50 dark:border-indigo-900/30">
-          <div className="px-4 py-3 space-y-1">
-            {navLinks.map((path, i) => (
-              <Link
-                key={path}
-                to={path}
-                onClick={() => setMobileOpen(false)}
-                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === path
-                    ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/10'
-                }`}
-              >
-                {labels[i]}
-              </Link>
-            ))}
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden transition-all duration-300 ease-out ${
+          mobileOpen
+            ? 'max-h-[400px] opacity-100'
+            : 'max-h-0 opacity-0 overflow-hidden'
+        }`}
+      >
+        <div className="glass border-t border-slate-200/60 dark:border-white/8 px-4 py-3">
+          <div className="space-y-1">
+            {navLinks.map(({ path, label }, i) => {
+              const isActive = location.pathname === path
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md shadow-indigo-500/20'
+                      : 'text-slate-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                  }`}
+                  style={{
+                    animationDelay: `${i * 50}ms`,
+                    animation: mobileOpen
+                      ? `fadeInUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) ${i * 50}ms both`
+                      : 'none',
+                  }}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                      isActive ? 'bg-white' : 'bg-indigo-400/50'
+                    }`}
+                  />
+                  {label}
+                </Link>
+              )
+            })}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   )
 }

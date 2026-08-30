@@ -16,7 +16,7 @@ export default function TimelineCard({ item, index, isLast: _isLast, type = 'exp
       <div className={`group relative ${
         index % 2 === 0 ? 'md:mr-[calc(50%+24px)] md:text-left' : 'md:ml-[calc(50%+24px)] md:text-left'
       }`}>
-        <div className="relative bg-white dark:bg-gray-800/80 rounded-2xl p-5 md:p-6 shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700/50 hover:shadow-xl hover:border-indigo-100 dark:hover:border-indigo-800/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+        <div className="relative bg-white dark:bg-gray-800/80 rounded-2xl p-5 md:p-6 shadow-sm dark:shadow-gray-900/50 border border-slate-200/80 dark:border-gray-700/50 hover:shadow-xl hover:border-indigo-200 dark:hover:border-indigo-700/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
           <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
 
           <div className="relative">
@@ -35,7 +35,7 @@ export default function TimelineCard({ item, index, isLast: _isLast, type = 'exp
                 {item.school}
               </p>
             )}
-            <p className="text-gray-600 dark:text-gray-300 mt-3 leading-relaxed text-sm">
+            <p className="text-slate-600 dark:text-gray-300 mt-3 leading-relaxed text-sm">
               {item.description}
             </p>
           </div>
