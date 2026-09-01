@@ -455,3 +455,137 @@ code, pre {
 .btn-press:active {
   transform: scale(0.97) translateY(1px);
 }
+
+/* ============================
+   CV Styles
+   ============================ */
+
+.cv-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-h);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.cv-section-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1023px) {
+  .cv-section-title {
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================
+   Print Styles (PDF Export)
+   ============================ */
+@media print {
+  @page {
+    margin: 0.5cm;
+    size: A4;
+  }
+
+  html, body {
+    background: white !important;
+    color: #111 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  /* Hide interactive/non-essential elements */
+  nav,
+  .cv-nav-float {
+    display: none !important;
+  }
+
+  /* Remove background colors and shadows */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure backgrounds print */
+  .bg-white, .bg-gray-50, .bg-gray-100 {
+    background: white !important;
+  }
+
+  /* Ensure dark mode text prints as dark */
+  .text-gray-100,
+  .text-gray-300,
+  .text-gray-400,
+  .text-gray-900 {
+    color: #111 !important;
+  }
+
+  .text-indigo-400,
+  .text-indigo-300,
+  .text-indigo-600 {
+    color: #4338ca !important;
+  }
+
+  /* Force white background for dark mode */
+  .bg-gray-800,
+  .bg-gray-900 {
+    background: white !important;
+  }
+
+  /* Borders should be light gray */
+  .border-gray-700,
+  .border-gray-200 {
+    border-color: #d1d5db !important;
+  }
+
+  /* Links */
+  a[href]:after {
+    content: none !important;
+  }
+
+  /* Ensure text is visible */
+  strong {
+    font-weight: 700;
+  }
+
+  /* Page break handling */
+  section {
+    break-inside: avoid;
+  }
+
+  h2, h3 {
+    break-after: avoid;
+  }
+
+  /* Skill dots should print */
+  .cv-print-dot {
+    background-color: #9ca3af !important;
+  }
+
+  /* Skill progress bars should print */
+  .h-1\.5 {
+    height: 6px !important;
+    background-color: #e5e7eb !important;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+}
