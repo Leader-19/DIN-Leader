@@ -58,7 +58,7 @@ export default function CV() {
       <div className="cv-nav-float sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between h-12">
           <span className="text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">
-            DIN Leader — CV
+            DIN Leader - Portfolio
           </span>
           <div className="flex items-center gap-2">
             <button
@@ -117,7 +117,7 @@ export default function CV() {
 
       {/* CV Container */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-10">
-        <div className="flex flex-col lg:flex-row gap-0 bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="cv-print-layout flex flex-col lg:flex-row gap-0 bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 overflow-hidden">
 
           {/* ==================== SIDEBAR ==================== */}
           <aside className="w-full lg:w-[320px] bg-gray-50 dark:bg-gray-900/60 border-r border-gray-200 dark:border-gray-700 p-6 sm:p-8 lg:p-8">
@@ -174,24 +174,13 @@ export default function CV() {
                     if (catSkills.length === 0) return null
                     return (
                       <div key={key}>
-                        <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-2">{label}</h3>
-                        <div className="space-y-2">
+                        <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">{label}</h3>
+                        <div className="flex flex-wrap gap-1.5">
                           {catSkills.map((skill) => (
-                            <div key={skill.name} className="group">
-                              <div className="flex items-center justify-between mb-1">
-                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-700 dark:text-gray-300">
-                                  <span className="w-2 h-2 rounded-full flex-shrink-0 cv-print-dot" style={{ backgroundColor: skill.color }}></span>
-                                  {skill.name}
-                                </span>
-                                <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 tabular-nums">{skill.level}%</span>
-                              </div>
-                              <div className="h-1.5 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                                <div
-                                  className="h-full rounded-full transition-all duration-700 ease-out group-hover:brightness-110"
-                                  style={{ width: `${skill.level}%`, background: `linear-gradient(90deg, ${skill.color}, ${skill.color}cc)` }}
-                                ></div>
-                              </div>
-                            </div>
+                            <span key={skill.name} className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-medium text-gray-700 dark:text-gray-300 rounded-sm" style={{ borderColor: skill.color + '60', borderWidth: '1px', borderStyle: 'solid' }}>
+                              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 cv-print-dot" style={{ backgroundColor: skill.color }}></span>
+                              {skill.name}
+                            </span>
                           ))}
                         </div>
                       </div>
